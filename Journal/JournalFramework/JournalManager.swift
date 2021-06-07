@@ -11,40 +11,52 @@ struct JournalError: Error {
     var localizedDescription: String
 }
 
-final class JournalManager {
+class JournalManager {
     
-    private let filePath: URL
+    let filePath: URL
     
-    private(set) var journals: [String: Journal] = [:]
+    private(set) var library: [String: Journal]
     
-    init(_ url: URL = URL(fileURLWithPath: "/Users/cy/Desktop/Journal/Journal/Journal.json"),
-         _ journals: [String: Journal] = [:]) {
-        self.filePath = url
-        self.journals = journals
-        fetch()
+    init(_ filePath: URL = URL(fileURLWithPath: "/Users/cy/Desktop/Journal/Journal/Library.json"),
+         _ library: [String: Journal] = [:]) {
+        self.filePath = filePath
+        self.library = library
+        readFromJSON()
     }
     
-    func fetch() {
+    func readFromJSON() {
         
         guard let data = try? Data(contentsOf: filePath) else { return }
         
         let decode = JSONDecoder()
+        decode.keyDecodingStrategy = .convertFromSnakeCase
+        decode.dataDecodingStrategy = .base64
         
         do {
-            let fetchedJournals = try decode.decode([Journal].self, from: data)
-            
-            for journal in fetchedJournals {
-                journals[journal.title] = journal
-            }
-            
+            library = try decode.decode([String: Journal].self, from: data)
         } catch {
             print("Error here",error.localizedDescription)
         }
     }
     
-    func execute(_ action: JournalAction) -> Result<String, Error> {
-        action.action(with: &journals, with: filePath)
-        return action.execute(journals)
+    func writeToJSON() -> Result<Any?, Error> {
+        let encoder: JSONEncoder = JSONEncoder()
+    
+        do {
+            let data = try encoder.encode(library)
+            try data.write(to: filePath)
+            return .success("Success!")
+        } catch {
+            return .failure(error)
+        }
+    }
+    
+    func execute(_ action: JournalAction) -> Result<Any?, Error> {
+        if let error = action.action(with: &library) {
+            return .failure(error)
+        } else {
+            return writeToJSON()
+        }
     }
     
 }

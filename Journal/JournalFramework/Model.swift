@@ -16,11 +16,19 @@ protocol Entity: Codable {
 class Journal: Entity {
     var id: UUID = UUID()
     var title: String
-    var entries: [String: Entry] = [:]
+    
+    var entries: [String: Entry] = [:] {
+        didSet {
+            updatedAt = Date()
+        }
+    }
+    
     var createdAt: Date = Date()
+    var updatedAt: Date
     
     init(_ title: String) {
         self.title = title
+        self.updatedAt = createdAt
     }
 }
 

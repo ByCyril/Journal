@@ -9,58 +9,54 @@ import XCTest
 @testable import Journal
 
 class JournalTests: XCTestCase {
+    
+    class MockJournalManager: JournalManager {
+        override func writeToJSON() -> Result<Any?, Error> {
+            return .success(journals)
+        }
+    }
+    
+    func testCreateNewJournal() {
+        
+        let mockManager: MockJournalManager = MockJournalManager(URL(fileURLWithPath: ""), [:])
+        
+        let journalTitle: String = UUID().uuidString
+        let entryTitle: String = UUID().uuidString
+        let content: String = UUID().uuidString
+        
+        let action = JournalCreate(journalTitle, entryTitle, content: content)
+        let result = mockManager.execute(action)
+        
+        switch result {
+        case .success(let res):
+            let journals = res as! [String: Journal]
+            XCTAssertEqual(journals[journalTitle]!.title, journalTitle)
+        case .failure(let error):
+            XCTAssertTrue(false, error.localizedDescription)
+        }
+    }
+    
+    func testCreateJournalWithDuplicates() {
+        let mockManager: MockJournalManager = MockJournalManager(URL(fileURLWithPath: ""), [:])
 
-    private let manager: JournalManager = JournalManager(URL(fileURLWithPath: "/Users/cy/Desktop/Journal/JournalTests/Journal-Demo.json"))
-    
-    func testCreatingJournals() {
-        let journalTitle = UUID().uuidString
-        let entityTitle = UUID().uuidString
-        let content = UUID().uuidString
+        let journalTitle: String = "Mock Journal Title"
         
-        let action = JournalCreate(journalTitle: journalTitle,
-                                   entityTitle: entityTitle,
-                                   content: content)
+        let action1 = JournalCreate(journalTitle, "Entry", content: UUID().uuidString)
+        let _ = mockManager.execute(action1)
         
-        let results = manager.execute(action)
+        let action2 = JournalCreate(journalTitle, "Entry", content: UUID().uuidString)
+        let result = mockManager.execute(action2)
         
-        switch results {
-        case .success(let success):
-            XCTAssert(success == "Success!")
+        switch result {
+        case .success(let res):
+            let journals = res as! [String: Journal]
+            XCTAssertEqual(journals[journalTitle]!.title, journalTitle)
+            XCTAssertEqual(journals[journalTitle]!.entries.count, 2)
+            XCTAssertNotNil(journals[journalTitle]!.entries["Entry"])
+            XCTAssertNotNil(journals[journalTitle]!.entries["Entry-1"])
+            
         case .failure(let error):
-            XCTAssertEqual(error.localizedDescription, "Error")
+            XCTAssertTrue(false, error.localizedDescription)
         }
-        
-        XCTAssertEqual(manager.journals.first!.title, journalTitle)
-        XCTAssertEqual(manager.journals.first!.entries.first!.title, entityTitle)
-        XCTAssertEqual(manager.journals.first!.entries.first!.content, content)
-        
-        testDelete(journalTitle, entityTitle)
     }
-    
-    func testDelete(_ journal: String,_ entry: String) {
-        
-        switch manager.execute(JournalDelete(entry: entry)) {
-        case .success(let success):
-            XCTAssert(success == "Success!")
-        case .failure(let error):
-            XCTAssertEqual(error.localizedDescription, "Error")
-        }
-        
-        XCTAssertEqual(manager.journals.count, 1)
-        XCTAssertEqual(manager.journals.first!.entries.count, 0)
-        
-        switch manager.execute(JournalDelete(journal: journal)) {
-        case .success(let success):
-            XCTAssert(success == "Success!")
-        case .failure(let error):
-            XCTAssertEqual(error.localizedDescription, "Error")
-        }
-        
-        XCTAssertEqual(manager.journals.count, 0)
-    }
-    
-    func testMultipleEntries() {
-    
-    }
-    
 }

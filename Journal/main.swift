@@ -16,16 +16,17 @@ struct JournalApp: ParsableCommand {
                                                                           discussion: "Discussion",
                                                                           version: "Version",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [Create.self])
+                                                                          subcommands: [Create.self,
+                                                                                        List.self])
     
     static let manager: JournalManager = JournalManager()
         
-    static func process(_ result: Result<String, Error>) {
+    static func process(_ result: Result<Any?, Error>) {
         switch result {
         case .failure(let error):
             print("🛑",error.localizedDescription)
         case .success(let message):
-            print("🎉",message)
+            print("🎉",message as? String ?? "")
         }
     }
     
