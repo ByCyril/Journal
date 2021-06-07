@@ -51,7 +51,7 @@ class JournalManager {
         do {
             library = try decode.decode([String: Journal].self, from: data)
         } catch {
-            print("Error here",error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
     

@@ -28,6 +28,7 @@ final class JournalList: JournalAction {
         switch category {
         case .journalTitle:
             listJournalTitles(library)
+            
         case .journal(let title):
             if let journal = library[title] {
                 listJournalEntries(from: journal)
@@ -35,7 +36,7 @@ final class JournalList: JournalAction {
                 return .couldNotFindJournal(title)
             }
         }
-                
+        
         return nil
     }
     
@@ -45,7 +46,6 @@ final class JournalList: JournalAction {
             print(title)
         }
         print("*********************")
-
     }
     
     func listJournalEntries(from journal: Journal) {
