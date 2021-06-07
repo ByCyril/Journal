@@ -15,10 +15,10 @@ final class JournalManager {
     
     private let filePath: URL
     
-    private(set) var journals: [Journal]
+    private(set) var journals: [String: Journal] = [:]
     
     init(_ url: URL = URL(fileURLWithPath: "/Users/cy/Desktop/Journal/Journal/Journal.json"),
-         _ journals: [Journal] = []) {
+         _ journals: [String: Journal] = [:]) {
         self.filePath = url
         self.journals = journals
         fetch()
@@ -31,7 +31,12 @@ final class JournalManager {
         let decode = JSONDecoder()
         
         do {
-            journals = try decode.decode([Journal].self, from: data)
+            let fetchedJournals = try decode.decode([Journal].self, from: data)
+            
+            for journal in fetchedJournals {
+                journals[journal.title] = journal
+            }
+            
         } catch {
             print("Error here",error.localizedDescription)
         }

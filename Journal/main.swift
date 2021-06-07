@@ -16,63 +16,26 @@ struct JournalApp: ParsableCommand {
                                                                           discussion: "Discussion",
                                                                           version: "Version",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [Create.self, Delete.self, List.self])
+                                                                          subcommands: [Create.self])
     
-    static let journalManager: JournalManager = JournalManager()
-    
-    mutating func run() throws {}
-
+    static let manager: JournalManager = JournalManager()
+        
     static func process(_ result: Result<String, Error>) {
         switch result {
-        case .success(let message):
-            print("🎉", message)
         case .failure(let error):
-            print("🚨", error.localizedDescription)
+            print("🛑",error.localizedDescription)
+        case .success(let message):
+            print("🎉",message)
         }
     }
-}
+    
+    static func getInput() -> String {
+        let keyboard = FileHandle.standardInput
+        let inputData = keyboard.availableData
+        let strData = String(data: inputData, encoding: String.Encoding.utf8)!
+        return strData.trimmingCharacters(in: CharacterSet.newlines)
+    }
 
-extension JournalApp {
-    struct Create: ParsableCommand {
-        @Argument(help: "Title of Journal") var title: String
-        
-        @Option(name: .long, help: "Title of Entry") var entryTitle: String
-        @Option(name: .long, help: "Content of Entry") var content: String
-        
-        func run() throws {
-            
-            let action = JournalCreate(journalTitle: title, entityTitle: entryTitle, content: content)
-            let result = journalManager.execute(action)
-            process(result)
-        }
-    }
-}
-
-extension JournalApp {
-    struct Delete: ParsableCommand {
-        @Option(name: .long, help: "Delete Journal by Title") var journal: String?
-        @Option(name: .long, help: "Delete Entry by Title") var entry: String?
-        
-        func run() throws {
-            if let journal = journal {
-                let results = journalManager.execute(JournalDelete(journal: journal))
-                process(results)
-            } else if let entry = entry {
-                let results = journalManager.execute(JournalDelete(entry: entry))
-                process(results)
-            }
-        }
-        
-    }
-}
-
-extension JournalApp {
-    struct List: ParsableCommand {
-        func run() throws {
-            let results = journalManager.execute(JournalList())
-            process(results)
-        }
-    }
 }
 
 JournalApp.main()

@@ -10,12 +10,12 @@ import Foundation
 protocol JournalAction {
     var url: URL? { get set }
     
-    func action(with journals: inout [Journal], with url: URL)
-    func execute(_ journals: [Journal]) -> Result<String, Error>
+    func action(with journals: inout [String: Journal], with url: URL) 
+    func execute(_ journals: [String: Journal]) -> Result<String, Error>
 }
 
 extension JournalAction {
-    func execute(_ journals: [Journal]) -> Result<String, Error> {
+    func execute(_ journals: [String: Journal]) -> Result<String, Error> {
         guard let url = url else { return .failure(JournalError(localizedDescription: "URL is nil"))}
         let encoder: JSONEncoder = JSONEncoder()
         do {

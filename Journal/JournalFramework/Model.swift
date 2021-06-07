@@ -16,17 +16,12 @@ protocol Entity: Codable {
 class Journal: Entity {
     var id: UUID = UUID()
     var title: String
-    var entries: [Entry] = []
+    var entries: [String: Entry] = [:]
     var createdAt: Date = Date()
-
+    
     init(_ title: String) {
         self.title = title
     }
-    
-    static func == (lhs: Journal, rhs: Journal) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
 }
 
 struct Entry: Entity, Equatable {
