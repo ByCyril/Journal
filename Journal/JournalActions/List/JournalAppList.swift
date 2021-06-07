@@ -11,7 +11,7 @@ import ArgumentParser
 extension JournalApp {
     struct List: ParsableCommand {
         @Flag(name: .long, help: "List all Journal titles from your library") var library: Bool = false
-        @Option(name: .long, help: "List all entries from specified journal") var title: String?
+        @Option(name: .long, help: "List all entries from specified journal") var journal: String?
         
         func run() throws {
             
@@ -21,8 +21,8 @@ extension JournalApp {
                 return
             }
             
-            if let title = title {
-                let action = JournalList(.journal(title))
+            if let journal = journal {
+                let action = JournalList(.journal(journal))
                 process(manager.execute(action))
                 return
             }

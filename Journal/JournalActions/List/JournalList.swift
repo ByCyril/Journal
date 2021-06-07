@@ -22,7 +22,7 @@ final class JournalList: JournalAction {
     
     func action(with library: inout [String: Journal]) -> JournalError? {
         if library.isEmpty {
-            return JournalError(localizedDescription: "Your journal library is empty.")
+            return JournalError.isEmpty()
         }
         
         switch category {
@@ -32,8 +32,7 @@ final class JournalList: JournalAction {
             if let journal = library[title] {
                 listJournalEntries(from: journal)
             } else {
-                return JournalError(localizedDescription: "Could not find journal title: '\(title)' in your library")
-
+                return .couldNotFindJournal(title)
             }
         }
                 

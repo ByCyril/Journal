@@ -15,6 +15,8 @@
 		014C5270266DFE71004B1F01 /* JournalAppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C526F266DFE71004B1F01 /* JournalAppList.swift */; };
 		014C5271266DFF28004B1F01 /* JournalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C526D266DFD8A004B1F01 /* JournalList.swift */; };
 		014C5272266DFF2B004B1F01 /* JournalAppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C526F266DFE71004B1F01 /* JournalAppList.swift */; };
+		014C5275266E9E17004B1F01 /* JournalDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5274266E9E17004B1F01 /* JournalDelete.swift */; };
+		014C5277266EA5DC004B1F01 /* JournalAppDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5276266EA5DC004B1F01 /* JournalAppDelete.swift */; };
 		017AF367266AE4BF00C563DC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF366266AE4BF00C563DC /* main.swift */; };
 		017AF36F266AE52D00C563DC /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 017AF36E266AE52D00C563DC /* ArgumentParser */; };
 		017AF371266AEC0400C563DC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF370266AEC0400C563DC /* Model.swift */; };
@@ -45,6 +47,8 @@
 		014C5267266DE365004B1F01 /* JournalAppCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppCreate.swift; sourceTree = "<group>"; };
 		014C526D266DFD8A004B1F01 /* JournalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalList.swift; sourceTree = "<group>"; };
 		014C526F266DFE71004B1F01 /* JournalAppList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppList.swift; sourceTree = "<group>"; };
+		014C5274266E9E17004B1F01 /* JournalDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDelete.swift; sourceTree = "<group>"; };
+		014C5276266EA5DC004B1F01 /* JournalAppDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppDelete.swift; sourceTree = "<group>"; };
 		017AF363266AE4BF00C563DC /* Journal */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Journal; sourceTree = BUILT_PRODUCTS_DIR; };
 		017AF366266AE4BF00C563DC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		017AF370266AEC0400C563DC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -105,6 +109,15 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		014C5278266EE294004B1F01 /* Delete */ = {
+			isa = PBXGroup;
+			children = (
+				014C5274266E9E17004B1F01 /* JournalDelete.swift */,
+				014C5276266EA5DC004B1F01 /* JournalAppDelete.swift */,
+			);
+			path = Delete;
+			sourceTree = "<group>";
+		};
 		017AF35A266AE4BF00C563DC = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +161,7 @@
 		01DAED9B266D4B58006017CF /* JournalActions */ = {
 			isa = PBXGroup;
 			children = (
+				014C5278266EE294004B1F01 /* Delete */,
 				014C5269266DE389004B1F01 /* Create */,
 				014C5273266E0714004B1F01 /* List */,
 			);
@@ -258,9 +272,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				014C5277266EA5DC004B1F01 /* JournalAppDelete.swift in Sources */,
 				01DAED9A266D4B04006017CF /* JournalAction.swift in Sources */,
 				017AF367266AE4BF00C563DC /* main.swift in Sources */,
 				017AF371266AEC0400C563DC /* Model.swift in Sources */,
+				014C5275266E9E17004B1F01 /* JournalDelete.swift in Sources */,
 				01DAED94266CA81E006017CF /* JournalManager.swift in Sources */,
 				014C526E266DFD8A004B1F01 /* JournalList.swift in Sources */,
 				014C5268266DE365004B1F01 /* JournalAppCreate.swift in Sources */,

@@ -17,14 +17,15 @@ struct JournalApp: ParsableCommand {
                                                                           version: "Version",
                                                                           shouldDisplay: true,
                                                                           subcommands: [Create.self,
-                                                                                        List.self])
+                                                                                        List.self,
+                                                                                        Delete.self])
     
     static let manager: JournalManager = JournalManager()
         
-    static func process(_ result: Result<Any?, Error>) {
+    static func process(_ result: Result<Any?, JournalError>) {
         switch result {
         case .failure(let error):
-            print("🛑",error.localizedDescription)
+            print("🛑",error.message)
         case .success(let message):
             print("🎉",message as? String ?? "")
         }

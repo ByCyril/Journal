@@ -41,7 +41,7 @@ final class JournalCreate: JournalAction {
             return
         }
         
-        let count = Int(title.components(separatedBy: "-").last ?? "0") ?? 0 + 1
+        let count = (Int(title.components(separatedBy: "-").last ?? "0") ?? 0) + 1
         
         addNew(entry, in: journal, with: title + "-\(count)")
     }
