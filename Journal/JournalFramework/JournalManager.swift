@@ -7,36 +7,17 @@
 
 import Foundation
 
-enum JournalError: Error {
-    case isEmpty(String? = nil)
-    case couldNotFindEntry(String)
-    case couldNotFindJournal(String)
-    case error(String)
-    
-    var message: String {
-        switch self {
-        case .couldNotFindEntry(let title):
-            return "Could not find '\(title)' in this journal."
-        case .couldNotFindJournal(let title):
-            return "Could not find '\(title)' in your library."
-        case .error(let error):
-            return error
-        case .isEmpty(let message):
-            return message ?? "Empty"
-        }
-    }
-}
-
 class JournalManager {
     
     let filePath: URL
     
-    private(set) var library: [String: Journal]
+    private(set) var journals: [Journal] = []
+    private(set) var journalTitleReference: Set<String> = []
     
     init(_ filePath: URL = URL(fileURLWithPath: "/Users/cy/Desktop/Journal/Journal/Library.json"),
-         _ library: [String: Journal] = [:]) {
+         _ journals: [Journal] = []) {
         self.filePath = filePath
-        self.library = library
+        self.journals = journals
         readFromJSON()
     }
     
@@ -49,7 +30,11 @@ class JournalManager {
         decode.dataDecodingStrategy = .base64
         
         do {
-            library = try decode.decode([String: Journal].self, from: data)
+            journals = try decode.decode([Journal].self, from: data)
+            
+            for journal in journals {
+                journalTitleReference.insert(journal.title)
+            }
         } catch {
             print(error.localizedDescription)
         }
@@ -59,7 +44,7 @@ class JournalManager {
         let encoder: JSONEncoder = JSONEncoder()
     
         do {
-            let data = try encoder.encode(library)
+            let data = try encoder.encode(journals)
             try data.write(to: filePath)
             return .success("Success!")
         } catch {
@@ -68,7 +53,7 @@ class JournalManager {
     }
     
     func execute(_ action: JournalAction) -> Result<Any?, JournalError> {
-        if let error = action.action(with: &library) {
+        if let error = action.action(with: &journals, and: &journalTitleReference) {
             return .failure(error)
         } else {
             return writeToJSON()

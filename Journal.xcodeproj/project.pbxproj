@@ -7,25 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011F6B40266D7C7D0023DF3F /* JournalCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F6B3F266D7C7D0023DF3F /* JournalCreate.swift */; };
-		014C5268266DE365004B1F01 /* JournalAppCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5267266DE365004B1F01 /* JournalAppCreate.swift */; };
-		014C526B266DF284004B1F01 /* JournalAppCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5267266DE365004B1F01 /* JournalAppCreate.swift */; };
-		014C526C266DF2A0004B1F01 /* JournalCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F6B3F266D7C7D0023DF3F /* JournalCreate.swift */; };
-		014C526E266DFD8A004B1F01 /* JournalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C526D266DFD8A004B1F01 /* JournalList.swift */; };
-		014C5270266DFE71004B1F01 /* JournalAppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C526F266DFE71004B1F01 /* JournalAppList.swift */; };
-		014C5271266DFF28004B1F01 /* JournalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C526D266DFD8A004B1F01 /* JournalList.swift */; };
-		014C5272266DFF2B004B1F01 /* JournalAppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C526F266DFE71004B1F01 /* JournalAppList.swift */; };
-		014C5275266E9E17004B1F01 /* JournalDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5274266E9E17004B1F01 /* JournalDelete.swift */; };
-		014C5277266EA5DC004B1F01 /* JournalAppDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5276266EA5DC004B1F01 /* JournalAppDelete.swift */; };
+		010B27DD26700ACE00172D32 /* JournalAppSort+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B27DC26700ACE00172D32 /* JournalAppSort+Extension.swift */; };
+		010B27E026700E1900172D32 /* JournalSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B27DF26700E1900172D32 /* JournalSearch.swift */; };
+		010B27E226700E8F00172D32 /* JournalAppSearch+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B27E126700E8F00172D32 /* JournalAppSearch+Extension.swift */; };
+		014C527A266EE4AD004B1F01 /* JournalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5279266EE4AD004B1F01 /* JournalError.swift */; };
+		014C527C266EE5A0004B1F01 /* JournalCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C527B266EE5A0004B1F01 /* JournalCreate.swift */; };
+		014C527D266EE756004B1F01 /* JournalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5279266EE4AD004B1F01 /* JournalError.swift */; };
+		014C527E266EE767004B1F01 /* JournalCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C527B266EE5A0004B1F01 /* JournalCreate.swift */; };
+		014C5280266EE9CC004B1F01 /* JournalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C527F266EE9CC004B1F01 /* JournalList.swift */; };
+		014C5281266EED5B004B1F01 /* JournalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C527F266EE9CC004B1F01 /* JournalList.swift */; };
+		014C5283266F5967004B1F01 /* JournalSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5282266F5967004B1F01 /* JournalSort.swift */; };
+		014C5297266F7068004B1F01 /* JournalSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014C5282266F5967004B1F01 /* JournalSort.swift */; };
 		017AF367266AE4BF00C563DC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF366266AE4BF00C563DC /* main.swift */; };
 		017AF36F266AE52D00C563DC /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 017AF36E266AE52D00C563DC /* ArgumentParser */; };
-		017AF371266AEC0400C563DC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF370266AEC0400C563DC /* Model.swift */; };
+		017AF371266AEC0400C563DC /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF370266AEC0400C563DC /* Journal.swift */; };
 		01DAED8C266C0A4D006017CF /* JournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DAED8B266C0A4D006017CF /* JournalTests.swift */; };
 		01DAED94266CA81E006017CF /* JournalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DAED93266CA81E006017CF /* JournalManager.swift */; };
 		01DAED9A266D4B04006017CF /* JournalAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DAED99266D4B04006017CF /* JournalAction.swift */; };
 		01DAED9C266D4DD0006017CF /* JournalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DAED93266CA81E006017CF /* JournalManager.swift */; };
 		01DAED9D266D4DD3006017CF /* JournalAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DAED99266D4B04006017CF /* JournalAction.swift */; };
-		01DAEDA1266D4DD7006017CF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF370266AEC0400C563DC /* Model.swift */; };
+		01DAEDA1266D4DD7006017CF /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF370266AEC0400C563DC /* Journal.swift */; };
 		01DAEDA2266D4DD7006017CF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017AF366266AE4BF00C563DC /* main.swift */; };
 		01DAEDA5266D4DF2006017CF /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 01DAEDA4266D4DF2006017CF /* ArgumentParser */; };
 /* End PBXBuildFile section */
@@ -43,15 +44,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		011F6B3F266D7C7D0023DF3F /* JournalCreate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalCreate.swift; sourceTree = "<group>"; };
-		014C5267266DE365004B1F01 /* JournalAppCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppCreate.swift; sourceTree = "<group>"; };
-		014C526D266DFD8A004B1F01 /* JournalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalList.swift; sourceTree = "<group>"; };
-		014C526F266DFE71004B1F01 /* JournalAppList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppList.swift; sourceTree = "<group>"; };
-		014C5274266E9E17004B1F01 /* JournalDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDelete.swift; sourceTree = "<group>"; };
-		014C5276266EA5DC004B1F01 /* JournalAppDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalAppDelete.swift; sourceTree = "<group>"; };
+		010B27DC26700ACE00172D32 /* JournalAppSort+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalAppSort+Extension.swift"; sourceTree = "<group>"; };
+		010B27DF26700E1900172D32 /* JournalSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalSearch.swift; sourceTree = "<group>"; };
+		010B27E126700E8F00172D32 /* JournalAppSearch+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalAppSearch+Extension.swift"; sourceTree = "<group>"; };
+		014C5279266EE4AD004B1F01 /* JournalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalError.swift; sourceTree = "<group>"; };
+		014C527B266EE5A0004B1F01 /* JournalCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalCreate.swift; sourceTree = "<group>"; };
+		014C527F266EE9CC004B1F01 /* JournalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalList.swift; sourceTree = "<group>"; };
+		014C5282266F5967004B1F01 /* JournalSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalSort.swift; sourceTree = "<group>"; };
 		017AF363266AE4BF00C563DC /* Journal */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Journal; sourceTree = BUILT_PRODUCTS_DIR; };
 		017AF366266AE4BF00C563DC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		017AF370266AEC0400C563DC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		017AF370266AEC0400C563DC /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
 		01DAED82266C02F7006017CF /* Library.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Library.json; sourceTree = "<group>"; };
 		01DAED89266C0A4D006017CF /* JournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01DAED8B266C0A4D006017CF /* JournalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTests.swift; sourceTree = "<group>"; };
@@ -81,41 +83,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		014C5269266DE389004B1F01 /* Create */ = {
+		010B27DE26700DFF00172D32 /* Sort */ = {
 			isa = PBXGroup;
 			children = (
-				011F6B3F266D7C7D0023DF3F /* JournalCreate.swift */,
-				014C5267266DE365004B1F01 /* JournalAppCreate.swift */,
+				014C5282266F5967004B1F01 /* JournalSort.swift */,
+				010B27DC26700ACE00172D32 /* JournalAppSort+Extension.swift */,
 			);
-			path = Create;
+			path = Sort;
 			sourceTree = "<group>";
 		};
 		014C526A266DE3C8004B1F01 /* JournalFramework */ = {
 			isa = PBXGroup;
 			children = (
-				017AF370266AEC0400C563DC /* Model.swift */,
+				017AF370266AEC0400C563DC /* Journal.swift */,
+				014C5279266EE4AD004B1F01 /* JournalError.swift */,
 				01DAED99266D4B04006017CF /* JournalAction.swift */,
 				01DAED93266CA81E006017CF /* JournalManager.swift */,
 			);
 			path = JournalFramework;
-			sourceTree = "<group>";
-		};
-		014C5273266E0714004B1F01 /* List */ = {
-			isa = PBXGroup;
-			children = (
-				014C526D266DFD8A004B1F01 /* JournalList.swift */,
-				014C526F266DFE71004B1F01 /* JournalAppList.swift */,
-			);
-			path = List;
-			sourceTree = "<group>";
-		};
-		014C5278266EE294004B1F01 /* Delete */ = {
-			isa = PBXGroup;
-			children = (
-				014C5274266E9E17004B1F01 /* JournalDelete.swift */,
-				014C5276266EA5DC004B1F01 /* JournalAppDelete.swift */,
-			);
-			path = Delete;
 			sourceTree = "<group>";
 		};
 		017AF35A266AE4BF00C563DC = {
@@ -161,9 +146,11 @@
 		01DAED9B266D4B58006017CF /* JournalActions */ = {
 			isa = PBXGroup;
 			children = (
-				014C5278266EE294004B1F01 /* Delete */,
-				014C5269266DE389004B1F01 /* Create */,
-				014C5273266E0714004B1F01 /* List */,
+				014C527B266EE5A0004B1F01 /* JournalCreate.swift */,
+				014C527F266EE9CC004B1F01 /* JournalList.swift */,
+				010B27DF26700E1900172D32 /* JournalSearch.swift */,
+				010B27E126700E8F00172D32 /* JournalAppSearch+Extension.swift */,
+				010B27DE26700DFF00172D32 /* Sort */,
 			);
 			path = JournalActions;
 			sourceTree = "<group>";
@@ -272,16 +259,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014C5277266EA5DC004B1F01 /* JournalAppDelete.swift in Sources */,
 				01DAED9A266D4B04006017CF /* JournalAction.swift in Sources */,
 				017AF367266AE4BF00C563DC /* main.swift in Sources */,
-				017AF371266AEC0400C563DC /* Model.swift in Sources */,
-				014C5275266E9E17004B1F01 /* JournalDelete.swift in Sources */,
+				017AF371266AEC0400C563DC /* Journal.swift in Sources */,
+				010B27E026700E1900172D32 /* JournalSearch.swift in Sources */,
+				014C527A266EE4AD004B1F01 /* JournalError.swift in Sources */,
+				014C5280266EE9CC004B1F01 /* JournalList.swift in Sources */,
+				010B27E226700E8F00172D32 /* JournalAppSearch+Extension.swift in Sources */,
+				010B27DD26700ACE00172D32 /* JournalAppSort+Extension.swift in Sources */,
 				01DAED94266CA81E006017CF /* JournalManager.swift in Sources */,
-				014C526E266DFD8A004B1F01 /* JournalList.swift in Sources */,
-				014C5268266DE365004B1F01 /* JournalAppCreate.swift in Sources */,
-				011F6B40266D7C7D0023DF3F /* JournalCreate.swift in Sources */,
-				014C5270266DFE71004B1F01 /* JournalAppList.swift in Sources */,
+				014C527C266EE5A0004B1F01 /* JournalCreate.swift in Sources */,
+				014C5283266F5967004B1F01 /* JournalSort.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,15 +277,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01DAEDA1266D4DD7006017CF /* Model.swift in Sources */,
-				014C5272266DFF2B004B1F01 /* JournalAppList.swift in Sources */,
-				014C526C266DF2A0004B1F01 /* JournalCreate.swift in Sources */,
+				01DAEDA1266D4DD7006017CF /* Journal.swift in Sources */,
+				014C527E266EE767004B1F01 /* JournalCreate.swift in Sources */,
 				01DAEDA2266D4DD7006017CF /* main.swift in Sources */,
-				014C5271266DFF28004B1F01 /* JournalList.swift in Sources */,
+				014C5281266EED5B004B1F01 /* JournalList.swift in Sources */,
+				014C527D266EE756004B1F01 /* JournalError.swift in Sources */,
 				01DAED8C266C0A4D006017CF /* JournalTests.swift in Sources */,
+				014C5297266F7068004B1F01 /* JournalSort.swift in Sources */,
 				01DAED9D266D4DD3006017CF /* JournalAction.swift in Sources */,
 				01DAED9C266D4DD0006017CF /* JournalManager.swift in Sources */,
-				014C526B266DF284004B1F01 /* JournalAppCreate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

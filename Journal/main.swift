@@ -11,16 +11,36 @@ import ArgumentParser
 
 struct JournalApp: ParsableCommand {
     
-    static var configuration: CommandConfiguration = CommandConfiguration(commandName: "Command Name",
-                                                                          abstract: "Abstract",
-                                                                          discussion: "Discussion",
-                                                                          version: "Version",
+    static var configuration: CommandConfiguration = CommandConfiguration(commandName: "Journal",
+                                                                          abstract: "",
+                                                                          discussion: "",
+                                                                          version: "1.0",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [Create.self,
-                                                                                        List.self,
-                                                                                        Delete.self])
+                                                                          subcommands: [Sort.self,
+                                                                                        Search.self])
     
     static let manager: JournalManager = JournalManager()
+    
+    @Option(name: .long, help: "Contents of new journal entry") var create: String?
+    @Option(name: .long, help: "Title of entry") var title: String?
+    @Flag(name: .long, help: "List all journal entries") var list: Bool = false
+    
+    func run() throws {
+        
+        if list {
+            let action = JournalList()
+            let result = JournalApp.manager.execute(action)
+            JournalApp.process(result)
+            return
+        }
+        
+        if let title = title, let create = create {
+            let action = JournalCreate(title, create)
+            let result = JournalApp.manager.execute(action)
+            JournalApp.process(result)
+            return
+        }
+    }
         
     static func process(_ result: Result<Any?, JournalError>) {
         switch result {

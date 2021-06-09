@@ -10,53 +10,78 @@ import XCTest
 
 class JournalTests: XCTestCase {
     
-    class MockJournalManager: JournalManager {
-        override func writeToJSON() -> Result<Any?, Error> {
+    final class MockJournalManager: JournalManager {
+        override func writeToJSON() -> Result<Any?, JournalError> {
             return .success(journals)
         }
     }
     
-    func testCreateNewJournal() {
+    func testDuplicateTitleEntries() {
+        let manager = MockJournalManager()
         
-        let mockManager: MockJournalManager = MockJournalManager(URL(fileURLWithPath: ""), [:])
+        let _ = manager.execute(JournalCreate("Apple", "Content"))
+        let _ = manager.execute(JournalCreate("Apple", "Content1"))
+        let _ = manager.execute(JournalCreate("Apple", "Content2"))
+        let _ = manager.execute(JournalCreate("Apple-1", "Content3"))
+        let _ = manager.execute(JournalCreate("Apple", "Content4"))
         
-        let journalTitle: String = UUID().uuidString
-        let entryTitle: String = UUID().uuidString
-        let content: String = UUID().uuidString
+        let journals = manager.journalTitleReference
         
-        let action = JournalCreate(journalTitle, entryTitle, content: content)
-        let result = mockManager.execute(action)
+        XCTAssertEqual(journals.count, 5)
+        XCTAssertTrue(journals.contains("Apple"))
+        XCTAssertTrue(journals.contains("Apple-1"))
+        XCTAssertTrue(journals.contains("Apple-2"))
+        XCTAssertTrue(journals.contains("Apple-3"))
+        XCTAssertTrue(journals.contains("Apple-4"))
         
-        switch result {
-        case .success(let res):
-            let journals = res as! [String: Journal]
-            XCTAssertEqual(journals[journalTitle]!.title, journalTitle)
-        case .failure(let error):
-            XCTAssertTrue(false, error.localizedDescription)
-        }
+        let _ = manager.execute(JournalList())
+        
     }
     
-    func testCreateJournalWithDuplicates() {
-        let mockManager: MockJournalManager = MockJournalManager(URL(fileURLWithPath: ""), [:])
-
-        let journalTitle: String = "Mock Journal Title"
-        
-        let action1 = JournalCreate(journalTitle, "Entry", content: UUID().uuidString)
-        let _ = mockManager.execute(action1)
-        
-        let action2 = JournalCreate(journalTitle, "Entry", content: UUID().uuidString)
-        let result = mockManager.execute(action2)
-        
-        switch result {
-        case .success(let res):
-            let journals = res as! [String: Journal]
-            XCTAssertEqual(journals[journalTitle]!.title, journalTitle)
-            XCTAssertEqual(journals[journalTitle]!.entries.count, 2)
-            XCTAssertNotNil(journals[journalTitle]!.entries["Entry"])
-            XCTAssertNotNil(journals[journalTitle]!.entries["Entry-1"])
-            
-        case .failure(let error):
-            XCTAssertTrue(false, error.localizedDescription)
-        }
+    struct Test {
+        var title: String
+        var content: String
     }
+ 
+    func testSorting() {
+        let manager = MockJournalManager()
+        
+        var journals: [JournalAction] = []
+        
+        var tests = [Test(title: "abc", content: "abccda"),
+                     Test(title: "cda", content: "ghdhsfyjsytd"),
+                     Test(title: "abcad", content: "gilufkyujytkh"),
+                     Test(title: "142", content: "fhsrt"),
+                     Test(title: "", content: "")]
+        
+        tests.sort { $0.title > $1.title }
+        
+        tests.forEach { test in
+            journals.append(JournalCreate(test.title, test.content))
+        }
+        
+        journals.forEach { action in
+            let _ = manager.execute(action)
+        }
+        
+        let sortingByTitleRes = manager.execute(JournalSort(.title))
+        let sortedJournalsByTitle = try! sortingByTitleRes.get() as! [Journal]
+        
+        for i in 0..<tests.count {
+            XCTAssertEqual(sortedJournalsByTitle[i].title, tests[i].title)
+            XCTAssertEqual(sortedJournalsByTitle[i].content, tests[i].content)
+        }
+        
+        tests.sort { $0.content.count > $1.content.count }
+        
+        let sortingByDateCreatedRes = manager.execute(JournalSort(.contentSize))
+        let sortedJournalsByDateCreated = try! sortingByDateCreatedRes.get() as! [Journal]
+        
+        for i in 0..<tests.count {
+            XCTAssertEqual(sortedJournalsByDateCreated[i].title, tests[i].title)
+            XCTAssertEqual(sortedJournalsByDateCreated[i].content, tests[i].content)
+        }
+        
+    }
+    
 }
