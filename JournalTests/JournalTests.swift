@@ -11,13 +11,14 @@ import XCTest
 class JournalTests: XCTestCase {
     
     final class MockJournalManager: JournalManager {
+        override func readFromJSON() {}
         override func writeToJSON() -> Result<Any?, JournalError> {
             return .success(journals)
         }
     }
     
     func testDuplicateTitleEntries() {
-        let manager = MockJournalManager()
+        let manager = MockJournalManager(URL(fileURLWithPath: "/Users/cy/Desktop/Journal/JournalTests/Journal-Demo.json"))
         
         let _ = manager.execute(JournalCreate("Apple", "Content"))
         let _ = manager.execute(JournalCreate("Apple", "Content1"))
@@ -44,7 +45,7 @@ class JournalTests: XCTestCase {
     }
  
     func testSorting() {
-        let manager = MockJournalManager()
+        let manager = MockJournalManager(URL(fileURLWithPath: "/Users/cy/Desktop/Journal/JournalTests/Journal-Demo.json"))
         
         var journals: [JournalAction] = []
         
@@ -72,7 +73,7 @@ class JournalTests: XCTestCase {
             XCTAssertEqual(sortedJournalsByTitle[i].content, tests[i].content)
         }
         
-        tests.sort { $0.content.count > $1.content.count }
+        tests.sort { $0.content.count < $1.content.count }
         
         let sortingByDateCreatedRes = manager.execute(JournalSort(.contentSize))
         let sortedJournalsByDateCreated = try! sortingByDateCreatedRes.get() as! [Journal]
@@ -82,6 +83,36 @@ class JournalTests: XCTestCase {
             XCTAssertEqual(sortedJournalsByDateCreated[i].content, tests[i].content)
         }
         
+    }
+    
+    func testDelete() {
+        let manager = MockJournalManager(URL(fileURLWithPath: ""))
+        
+        var journals: [JournalAction] = []
+        
+        var tests = [Test(title: "abc", content: "abccda"),
+                     Test(title: "cda", content: "ghdhsfyjsytd"),
+                     Test(title: "abcad", content: "gilufkyujytkh"),
+                     Test(title: "142", content: "fhsrt"),
+                     Test(title: "", content: "")]
+                
+        tests.forEach { test in
+            journals.append(JournalCreate(test.title, test.content))
+        }
+        
+        journals.forEach { action in
+            let _ = manager.execute(action)
+        }
+        
+        let res = manager.execute(JournalDelete("abc"))
+        tests.removeFirst()
+        let journalsAfterDeleting = try! res.get() as! [Journal]
+        
+        XCTAssertEqual(journalsAfterDeleting.count, tests.count)
+        
+        for i in 0..<tests.count {
+            XCTAssertEqual(tests[i].title, journalsAfterDeleting[i].title)
+        }
     }
     
 }

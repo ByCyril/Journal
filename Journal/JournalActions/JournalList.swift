@@ -10,15 +10,15 @@ import Foundation
 struct JournalList: JournalAction {
     
     func action(with journals: inout [Journal],
-                and titleReference: inout Set<String>) -> JournalError? {
+                and titleReference: inout Set<String>) -> JournalTask {
         
         if journals.isEmpty {
-            return .isEmpty("Journal is currently empty")
+            return .error("Journal is currently empty")
         }
         
         listByTitle(journals)
         
-        return nil
+        return .none
     }
     
     func listByTitle(_ journals: [Journal]) {

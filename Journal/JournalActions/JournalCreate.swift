@@ -15,12 +15,12 @@ class JournalCreate: JournalAction {
         newJournal = Journal(title, content)
     }
     
-    func action(with journals: inout [Journal], and titleReference: inout Set<String>) -> JournalError? {
+    func action(with journals: inout [Journal], and titleReference: inout Set<String>) -> JournalTask {
         
         if journals.isEmpty {
             journals.append(newJournal)
             titleReference.insert(newJournal.title)
-            return nil
+            return .writeToJSON
         }
         
         if titleReference.contains(newJournal.title) {
@@ -31,7 +31,7 @@ class JournalCreate: JournalAction {
         journals.append(newJournal)
         titleReference.insert(newJournal.title)
       
-        return nil
+        return .writeToJSON
     }
     
     func rename(_ title: String,_ titleReference: Set<String>) -> String {

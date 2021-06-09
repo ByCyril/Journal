@@ -21,10 +21,10 @@ final class JournalSearch: JournalAction {
     }
     
     func action(with journals: inout [Journal],
-                and titleReference: inout Set<String>) -> JournalError? {
+                and titleReference: inout Set<String>) -> JournalTask {
         
         if journals.isEmpty {
-            return .isEmpty("Journal is Empty")
+            return .error("Journal is Empty")
         }
         
         if let title = title {
@@ -32,10 +32,10 @@ final class JournalSearch: JournalAction {
                 Set(journal.title.components(separatedBy: " ")).contains(title)
             }
             list(filteredJournals)
-            return nil
+            return .none
         }
         
-        return nil
+        return .none
     }
     
     func list(_ journals: [Journal]) {

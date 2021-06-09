@@ -8,5 +8,5 @@
 import Foundation
 
 protocol JournalAction {
-    func action(with journals: inout [Journal], and titleReference: inout Set<String>) -> JournalError?
+    func action(with journals: inout [Journal], and titleReference: inout Set<String>) -> JournalTask
 }

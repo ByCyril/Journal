@@ -17,7 +17,8 @@ struct JournalApp: ParsableCommand {
                                                                           version: "1.0",
                                                                           shouldDisplay: true,
                                                                           subcommands: [Sort.self,
-                                                                                        Search.self])
+                                                                                        Search.self,
+                                                                                        Delete.self])
     
     static let manager: JournalManager = JournalManager()
     

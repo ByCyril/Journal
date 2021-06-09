@@ -25,15 +25,15 @@ struct JournalSort: JournalAction {
     }
     
     func action(with journals: inout [Journal],
-                and titleReference: inout Set<String>) -> JournalError? {
+                and titleReference: inout Set<String>) -> JournalTask {
         
         if journals.isEmpty {
-            return .isEmpty("Journal is empty.")
+            return .error("Journal is empty.")
         }
         
         journals.sort { sort($0,$1) }
         
-        return nil
+        return .writeToJSON
     }
     
     func sort(_ A: Journal,_ B: Journal) -> Bool {

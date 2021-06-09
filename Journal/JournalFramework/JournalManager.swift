@@ -53,11 +53,17 @@ class JournalManager {
     }
     
     func execute(_ action: JournalAction) -> Result<Any?, JournalError> {
-        if let error = action.action(with: &journals, and: &journalTitleReference) {
-            return .failure(error)
-        } else {
+        let task = action.action(with: &journals, and: &journalTitleReference)
+        
+        switch task {
+        case .error(let errorMessage):
+            return .failure(JournalError.error(errorMessage))
+        case .writeToJSON:
             return writeToJSON()
+        case .none:
+            return .success(nil)
         }
+        
     }
     
 }
