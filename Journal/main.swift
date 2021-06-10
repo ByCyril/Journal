@@ -16,12 +16,14 @@ struct JournalApp: ParsableCommand {
                                                                           discussion: "",
                                                                           version: "1.0",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [])
+                                                                          subcommands: [Search.self])
     
     static let manager: JournalManager = JournalManager()
     
     @Option(name: .long, help: "Contents of new journal entry") var create: String?
     @Option(name: .long, help: "Title of entry") var title: String?
+    @Option(name: .long, help: "User") var user: String?
+    
     @Flag(name: .long, help: "List all journal entries") var list: Bool = false
     
     func run() throws {
@@ -34,7 +36,7 @@ struct JournalApp: ParsableCommand {
         }
         
         if let title = title, let create = create {
-            let action = JournalCreate(title, create)
+            let action = JournalCreate(title, create, user)
             let result = JournalApp.manager.execute(action)
             JournalApp.process(result)
             return

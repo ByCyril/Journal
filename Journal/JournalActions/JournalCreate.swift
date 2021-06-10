@@ -11,8 +11,8 @@ class JournalCreate: JournalAction {
     
     private var newJournal: Journal
     
-    init(_ title: String,_ content: String) {
-        newJournal = Journal(title, content)
+    init(_ title: String,_ content: String,_ user: String?) {
+        newJournal = Journal(title, content, user)
     }
     
     func action(with journals: inout [Journal], and titleReference: inout Set<String>) -> JournalTask {

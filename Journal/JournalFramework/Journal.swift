@@ -17,6 +17,7 @@ struct Journal: Entity {
     
     var createdAt: Date = Date()
     var lastUpdated: Date = Date()
+    var user: String?
     
     var title: String {
         didSet {
@@ -30,8 +31,9 @@ struct Journal: Entity {
         }
     }
     
-    init(_ title: String, _ content: String) {
+    init(_ title: String, _ content: String,_ user: String?) {
         self.title = title
         self.content = content
+        self.user = user
     }
 }
