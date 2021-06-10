@@ -40,7 +40,7 @@ class JournalManager {
         }
     }
     
-    func writeToJSON() -> Result<Any?, JournalError> {
+    func writeToJSON() -> Result<Any?, Error> {
         let encoder: JSONEncoder = JSONEncoder()
     
         do {
@@ -48,11 +48,11 @@ class JournalManager {
             try data.write(to: filePath)
             return .success("Success!")
         } catch {
-            return .failure(JournalError.error(error.localizedDescription))
+            return .failure(error)
         }
     }
     
-    func execute(_ action: JournalAction) -> Result<Any?, JournalError> {
+    func execute(_ action: JournalAction) -> Result<Any?, Error> {
         let task = action.action(with: &journals, and: &journalTitleReference)
         
         switch task {
@@ -61,7 +61,7 @@ class JournalManager {
         case .writeToJSON:
             return writeToJSON()
         case .none:
-            return .success(nil)
+            return .success("Success!")
         }
         
     }

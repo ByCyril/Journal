@@ -8,12 +8,14 @@
 import Foundation
 
 enum JournalError: Error {
-    case isEmpty(String? = nil)
+    case isEmpty
+    case error(String)
     case couldNotFindEntry(String)
     case couldNotFindJournal(String)
-    case error(String)
-    
-    var message: String {
+}
+
+extension JournalError: LocalizedError {
+    var errorDescription: String? {
         switch self {
         case .couldNotFindEntry(let title):
             return "Could not find '\(title)' in this journal."
@@ -21,8 +23,8 @@ enum JournalError: Error {
             return "Could not find '\(title)' in your library."
         case .error(let error):
             return error
-        case .isEmpty(let message):
-            return message ?? "Empty"
+        case .isEmpty:
+            return "Journal is empty."
         }
     }
 }

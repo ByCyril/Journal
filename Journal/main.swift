@@ -16,9 +16,7 @@ struct JournalApp: ParsableCommand {
                                                                           discussion: "",
                                                                           version: "1.0",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [Sort.self,
-                                                                                        Search.self,
-                                                                                        Delete.self])
+                                                                          subcommands: [])
     
     static let manager: JournalManager = JournalManager()
     
@@ -43,12 +41,12 @@ struct JournalApp: ParsableCommand {
         }
     }
         
-    static func process(_ result: Result<Any?, JournalError>) {
+    static func process(_ result: Result<Any?, Error>) {
         switch result {
         case .failure(let error):
-            print("🛑",error.message)
+            print("🛑", error.localizedDescription)
         case .success(let message):
-            print("🎉",message as? String ?? "")
+            print("🎉", message as? String ?? "")
         }
     }
     
