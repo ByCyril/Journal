@@ -9,11 +9,31 @@ import Foundation
 
 struct JournalList: JournalAction {
     
+    enum CategoryType {
+        case date(ascending: Bool)
+    }
+    
+    private let type: CategoryType?
+    
+    init(_ type: CategoryType? = nil) {
+        self.type = type
+    }
+    
     func action(with journals: inout [Journal],
                 and titleReference: inout Set<String>) -> JournalTask {
         
         if journals.isEmpty {
             return .error("Journal is currently empty")
+        }
+        
+        if let type = type {
+            switch type {
+            case .date(let ascending):
+                journals.sort {
+                    return ascending ? ($0.createdAt > $1.createdAt) : ($0.createdAt < $1.createdAt)
+                }
+                break
+            }
         }
         
         list(journals)

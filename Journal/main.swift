@@ -12,7 +12,8 @@ struct JournalApp: ParsableCommand {
     
     static var configuration: CommandConfiguration = CommandConfiguration(commandName: "Journal",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [Search.self])
+                                                                          subcommands: [Search.self,
+                                                                                        Recent.self])
     
     static let manager: JournalManager = JournalManager()
     
@@ -20,6 +21,8 @@ struct JournalApp: ParsableCommand {
     @Option(name: .long, help: "Title of entry") var title: String?
     
     @Flag(name: .long, help: "List all journal entries") var list: Bool = false
+    @Flag(name: .long, help: "List by Date") var date: Bool = false
+    @Flag(name: .long, help: "List in Ascending Order") var ascending: Bool = false
     
     func run() throws {
         
@@ -36,10 +39,18 @@ struct JournalApp: ParsableCommand {
     
     func listItems() {
         if !list { return }
+            
+        var action: JournalList
         
-        let action = JournalList()
+        if date {
+            action = JournalList(.date(ascending: !ascending))
+        } else {
+            action = JournalList()
+        }
+        
         let result = JournalApp.manager.execute(action)
         JournalApp.process(result)
+        
     }
         
     static func process(_ result: Result<Any?, Error>) {
