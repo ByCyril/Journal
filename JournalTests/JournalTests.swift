@@ -81,4 +81,43 @@ class JournalTests: XCTestCase {
         
     }
 
+    func testSearch() {
+        let itemToSearch = "Hello"
+        
+        let manager = MockJournalManager()
+        
+        let mockJournals = [MockJournalData(title: "hello world", content: "content"),
+                            MockJournalData(title: " ", content: "  "),
+                            MockJournalData(title: "", content: " "),
+                            MockJournalData(),
+                            MockJournalData(),
+                            MockJournalData(),
+                            MockJournalData()]
+        
+        mockJournals.forEach { data in
+            let _ = manager.execute(JournalCreate(data.title, data.content))
+        }
+        
+        let search = JournalSearch(itemToSearch)
+        
+        let _ = manager.execute(search)
+        
+        XCTAssertEqual(search.searchResults.count, 1)
+        XCTAssertEqual(search.searchResults[0].title, mockJournals[0].title)
+        XCTAssertEqual(search.searchResults[0].content, mockJournals[0].content)
+        
+        let search1 = JournalSearch(" ")
+        
+        let _ = manager.execute(search1)
+        
+        XCTAssertEqual(search1.searchResults.count, 3)
+        XCTAssertEqual(search1.searchResults[0].title, mockJournals[0].title)
+        XCTAssertEqual(search1.searchResults[0].content, mockJournals[0].content)
+        
+        XCTAssertEqual(search1.searchResults[1].title, mockJournals[1].title)
+        XCTAssertEqual(search1.searchResults[1].content, mockJournals[1].content)
+        
+        XCTAssertEqual(search1.searchResults[2].title, mockJournals[2].title)
+        XCTAssertEqual(search1.searchResults[2].content, mockJournals[2].content)
+    }
 }

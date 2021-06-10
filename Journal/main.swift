@@ -6,14 +6,13 @@
 //
 
 import Foundation
-
 import ArgumentParser
 
 struct JournalApp: ParsableCommand {
     
     static var configuration: CommandConfiguration = CommandConfiguration(commandName: "Journal",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [])
+                                                                          subcommands: [Search.self])
     
     static let manager: JournalManager = JournalManager()
     

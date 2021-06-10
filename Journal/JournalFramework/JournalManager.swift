@@ -7,6 +7,17 @@
 
 import Foundation
 
+/*
+ JournalManager
+    var journals = [Journal]()
+
+    readFromJSON()
+    writeToJSON()
+    
+    execute(_ action: JournalAction)
+ 
+ */
+
 class JournalManager {
     
     let filePath: URL
