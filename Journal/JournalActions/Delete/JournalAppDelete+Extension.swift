@@ -10,12 +10,25 @@ import ArgumentParser
 
 extension JournalApp {
     struct Delete: ParsableCommand {
-        @Argument(help: "Title of entry to delete") var title: String
+        @Option(help: "Title of entry to delete") var title: String?
+        @Flag(help: "Title of entry to delete") var all: Bool = false
         
         func run() throws {
-            let action = JournalDelete(title)
-            let result = manager.execute(action)
-            process(result)
+            
+            if all {
+                let action = JournalDelete(.all)
+                let results = manager.execute(action)
+                process(results)
+                return
+            }
+            
+            if let title = title {
+                let action = JournalDelete(.title(title))
+                let results = manager.execute(action)
+                process(results)
+                return
+            }
+            
         }
     }
 }

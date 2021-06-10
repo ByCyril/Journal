@@ -18,7 +18,7 @@ class JournalTests: XCTestCase {
     }
     
     func testDuplicateTitleEntries() {
-        let manager = MockJournalManager(URL(fileURLWithPath: "/Users/cy/Desktop/Journal/JournalTests/Journal-Demo.json"))
+        let manager = MockJournalManager(URL(fileURLWithPath: ""))
         
         let _ = manager.execute(JournalCreate("Apple", "Content"))
         let _ = manager.execute(JournalCreate("Apple", "Content1"))
@@ -40,20 +40,16 @@ class JournalTests: XCTestCase {
     }
     
     struct Test {
-        var title: String
-        var content: String
+        var title: String = UUID().uuidString
+        var content: String = UUID().uuidString
     }
  
     func testSorting() {
-        let manager = MockJournalManager(URL(fileURLWithPath: "/Users/cy/Desktop/Journal/JournalTests/Journal-Demo.json"))
+        let manager = MockJournalManager(URL(fileURLWithPath: ""))
         
         var journals: [JournalAction] = []
         
-        var tests = [Test(title: "abc", content: "abccda"),
-                     Test(title: "cda", content: "ghdhsfyjsytd"),
-                     Test(title: "abcad", content: "gilufkyujytkh"),
-                     Test(title: "142", content: "fhsrt"),
-                     Test(title: "", content: "")]
+        var tests = [Test(),Test(),Test(),Test(),Test()]
         
         tests.sort { $0.title > $1.title }
         
@@ -90,11 +86,7 @@ class JournalTests: XCTestCase {
         
         var journals: [JournalAction] = []
         
-        var tests = [Test(title: "abc", content: "abccda"),
-                     Test(title: "cda", content: "ghdhsfyjsytd"),
-                     Test(title: "abcad", content: "gilufkyujytkh"),
-                     Test(title: "142", content: "fhsrt"),
-                     Test(title: "", content: "")]
+        var tests = [Test(),Test(),Test(),Test(),Test()]
                 
         tests.forEach { test in
             journals.append(JournalCreate(test.title, test.content))
