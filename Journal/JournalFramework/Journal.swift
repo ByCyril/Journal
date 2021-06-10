@@ -15,7 +15,6 @@ protocol Entity: Codable {
 struct Journal: Entity {
     
     var createdAt: Date = Date()
-    var lastUpdated: Date = Date()
     
     var title: String
     var content: String
