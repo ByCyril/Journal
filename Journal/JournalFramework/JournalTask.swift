@@ -9,6 +9,6 @@ import Foundation
 
 enum JournalTask {
     case error(String)
-    case writeToJSON
+    case save
     case none
 }

@@ -58,7 +58,7 @@ class JournalManager {
         switch task {
         case .error(let errorMessage):
             return .failure(JournalError.error(errorMessage))
-        case .writeToJSON:
+        case .save:
             return writeToJSON()
         case .none:
             return .success("Success!")

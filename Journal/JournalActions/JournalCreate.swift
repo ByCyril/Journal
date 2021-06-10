@@ -20,7 +20,7 @@ class JournalCreate: JournalAction {
         if journals.isEmpty {
             journals.append(newJournal)
             titleReference.insert(newJournal.title)
-            return .writeToJSON
+            return .save
         }
         
         if titleReference.contains(newJournal.title) {
@@ -31,7 +31,7 @@ class JournalCreate: JournalAction {
         journals.append(newJournal)
         titleReference.insert(newJournal.title)
       
-        return .writeToJSON
+        return .save
     }
     
     func rename(_ title: String,_ titleReference: Set<String>) -> String {
