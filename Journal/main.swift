@@ -12,9 +12,6 @@ import ArgumentParser
 struct JournalApp: ParsableCommand {
     
     static var configuration: CommandConfiguration = CommandConfiguration(commandName: "Journal",
-                                                                          abstract: "",
-                                                                          discussion: "",
-                                                                          version: "1.0",
                                                                           shouldDisplay: true,
                                                                           subcommands: [])
     
@@ -24,7 +21,6 @@ struct JournalApp: ParsableCommand {
     @Option(name: .long, help: "Title of entry") var title: String?
     
     @Flag(name: .long, help: "List all journal entries") var list: Bool = false
-    @Flag(name: .shortAndLong, help: "List items in ascending") var ascending: Bool = false
     
     func run() throws {
         
