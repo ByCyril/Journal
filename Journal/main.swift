@@ -16,31 +16,35 @@ struct JournalApp: ParsableCommand {
                                                                           discussion: "",
                                                                           version: "1.0",
                                                                           shouldDisplay: true,
-                                                                          subcommands: [Search.self])
+                                                                          subcommands: [])
     
     static let manager: JournalManager = JournalManager()
     
     @Option(name: .long, help: "Contents of new journal entry") var create: String?
     @Option(name: .long, help: "Title of entry") var title: String?
-    @Option(name: .long, help: "User") var user: String?
     
     @Flag(name: .long, help: "List all journal entries") var list: Bool = false
+    @Flag(name: .shortAndLong, help: "List items in ascending") var ascending: Bool = false
     
     func run() throws {
         
-        if list {
-            let action = JournalList()
-            let result = JournalApp.manager.execute(action)
-            JournalApp.process(result)
-            return
-        }
+        listItems()
+        createJournal()
+    }
+    
+    func createJournal() {
+        guard let title = title, let create = create else { return }
+        let action = JournalCreate(title, create)
+        let result = JournalApp.manager.execute(action)
+        JournalApp.process(result)
+    }
+    
+    func listItems() {
+        if !list { return }
         
-        if let title = title, let create = create {
-            let action = JournalCreate(title, create, user)
-            let result = JournalApp.manager.execute(action)
-            JournalApp.process(result)
-            return
-        }
+        let action = JournalList()
+        let result = JournalApp.manager.execute(action)
+        JournalApp.process(result)
     }
         
     static func process(_ result: Result<Any?, Error>) {

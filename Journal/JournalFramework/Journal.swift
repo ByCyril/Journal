@@ -10,30 +10,18 @@ import Foundation
 protocol Entity: Codable {
     var title: String { get set }
     var createdAt: Date { get set }
-    var lastUpdated: Date { get set }
 }
 
 struct Journal: Entity {
     
     var createdAt: Date = Date()
     var lastUpdated: Date = Date()
-    var user: String?
     
-    var title: String {
-        didSet {
-            lastUpdated = Date()
-        }
-    }
+    var title: String
+    var content: String
     
-    var content: String {
-        didSet {
-            lastUpdated = Date()
-        }
-    }
-    
-    init(_ title: String, _ content: String,_ user: String?) {
+    init(_ title: String, _ content: String) {
         self.title = title
         self.content = content
-        self.user = user
     }
 }

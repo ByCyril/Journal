@@ -16,17 +16,23 @@ struct JournalList: JournalAction {
             return .error("Journal is currently empty")
         }
         
-        listByTitle(journals)
+        list(journals)
         
         return .none
     }
     
-    func listByTitle(_ journals: [Journal]) {
+    func list(_ journals: [Journal]) {
         print("###########################")
         print("")
-        for journal in journals {
-            print(journal.title)
+        for (i, journal) in journals.enumerated() {
+            let heading = "\(i)) ################ " + journal.title + " ################"
+            print(heading)
             print(journal.content)
+            
+            print("")
+            print("Date Created:",journal.createdAt.toString())
+            let footer = "".padding(toLength: heading.count, withPad: "#", startingAt: 0)
+            print(footer)
             print("")
         }
         print("###########################")
