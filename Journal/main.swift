@@ -13,7 +13,9 @@ struct JournalApp: ParsableCommand {
     static var configuration: CommandConfiguration = CommandConfiguration(commandName: "Journal",
                                                                           shouldDisplay: true,
                                                                           subcommands: [Search.self,
-                                                                                        Recent.self])
+                                                                                        Recent.self,
+                                                                                        Edit.self,
+                                                                                        Delete.self])
     
     static let manager: JournalManager = JournalManager()
     
@@ -32,6 +34,7 @@ struct JournalApp: ParsableCommand {
     
     func createJournal() {
         guard let title = title, let create = create else { return }
+        
         let action = JournalCreate(title, create)
         let result = JournalApp.manager.execute(action)
         JournalApp.process(result)
