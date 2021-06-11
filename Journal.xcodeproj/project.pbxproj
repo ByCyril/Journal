@@ -170,6 +170,15 @@
 			path = Edit;
 			sourceTree = "<group>";
 		};
+		017DF4E02672BAEF00C714CB /* Delete */ = {
+			isa = PBXGroup;
+			children = (
+				017DF4DC2672AE4300C714CB /* JournalDelete.swift */,
+				017DF4DE2672AF2A00C714CB /* JournalApp+Delete.swift */,
+			);
+			path = Delete;
+			sourceTree = "<group>";
+		};
 		01DAED8A266C0A4D006017CF /* JournalTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,8 +194,7 @@
 			children = (
 				014C527B266EE5A0004B1F01 /* JournalCreate.swift */,
 				014C527F266EE9CC004B1F01 /* JournalList.swift */,
-				017DF4DC2672AE4300C714CB /* JournalDelete.swift */,
-				017DF4DE2672AF2A00C714CB /* JournalApp+Delete.swift */,
+				017DF4E02672BAEF00C714CB /* Delete */,
 				017DF4DB2672ABD600C714CB /* Edit */,
 				017DF4D62672A0DF00C714CB /* Recents */,
 				017DF4CD2672847600C714CB /* Search */,
